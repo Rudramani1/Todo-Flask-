@@ -1,0 +1,60 @@
+{% extends './base.html' %}
+{% block title %} Home {% endblock title %}
+{% block body %}
+    
+ 
+      <div class="container">
+
+        <form action="/" method="POST">
+          <div class="mb-3">
+            <label for="Title" class="form-label">TODO Title</label>
+            <input type="text" class="form-control" name="title" id="Title" placeholder="Read Books, Study, Gym">
+          </div>
+          
+          <div class="mb-3">
+            <label for="Description" class="form-label">TODO Description</label>
+            <textarea class="form-control" name="desc" id="Description" rows="3"></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-outline-secondary btn-lg">Submit</button>
+        </form>   
+        {% if todos|length == 0 %}
+
+      <div class="alert alert-danger" role="alert">
+         No to do is found add some TODOS!
+      </div>
+    {% else %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">S.no</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for todo in todos %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ todo.title }}</td>
+                    <td>{{ todo.desc }}</td>
+                    <td>{{ todo.Time }}</td>
+                    <td>
+                        <a href="/update/{{ todo.Sno }}" type="button" class="btn btn-outline-success btn-sm mx-1">Update</a>
+                        <a href="/delete/{{ todo.Sno }}" type="button" class="btn btn-outline-danger btn-sm mx-1">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    
+        
+        </div>
+      </div>
+      
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+{% endblock body %}
