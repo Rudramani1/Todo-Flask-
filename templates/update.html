@@ -3,15 +3,15 @@
 <div class="container">
     <h1>Update Todo</h1>
 
-    <form action="/" method="POST">
+    <form action="/update/{{todos.Sno}}" method="POST">
       <div class="mb-3">
         <label for="Title" class="form-label">TODO Title</label>
-        <input type="text" class="form-control" name="title" id="Title" placeholder="Read Books, Study, Gym">
+        <input type="text" class="form-control" name="title" id="Title" value="{{todos.title}}" placeholder="Read Books, Study, Gym">
       </div>
       
       <div class="mb-3">
         <label for="Description" class="form-label">TODO Description</label>
-        <textarea class="form-control" name="desc" id="Description" rows="3"></textarea>
+        <textarea class="form-control" name="desc" id="Description" rows="3" value="{{todos.desc}}"></textarea>
       </div>
       
       <button type="submit" class="btn btn-outline-secondary btn-lg">Submit</button>

@@ -36,11 +36,27 @@ def home():
     return render_template('hello.html', todos=todos)
 
 
-@app.route('/update/<int:sno>')
+@app.route('/update/<int:sno>', methods=['GET', 'POST'])
 def update(sno):
+    if request.method == "POST":
+        titles = request.form['title']
+        descs = request.form['desc']
+        
+        # Fetch the Todo entry with the given Sno
+        todos = Todo.query.filter_by(Sno=sno).first()
+        
+        # Update its properties
+        if todos:
+            todos.title = titles
+            todos.desc = descs
+            db.session.add(todos)  # Corrected typo here
+            db.session.commit()
+        
+        return redirect('/')  # Assuming the homepage route shows all todos
+
+    # If GET request, fetch the Todo entry to prepopulate the form
     todos = Todo.query.filter_by(Sno=sno).first()
     return render_template('update.html', todos=todos)
-
 
 
 @app.route('/delete/<int:sno>')
